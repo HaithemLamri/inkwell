@@ -290,6 +290,11 @@ impl<'ctx> GlobalValue<'ctx> {
     pub fn set_linkage(self, linkage: Linkage) {
         unsafe { LLVMSetLinkage(self.as_value_ref(), linkage.into()) }
     }
+    pub fn build_string(f: impl FnOnce(&RustString)) -> Result<String, FromUtf8Error> {
+        let sr = RustString { bytes: RefCell::new(Vec::new()) };
+        f(&sr);
+        String::from_utf8(sr.bytes.into_inner())
+    }
 }
 
 unsafe impl AsValueRef for GlobalValue<'_> {
