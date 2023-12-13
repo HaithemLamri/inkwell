@@ -445,3 +445,17 @@ impl Display for StructType<'_> {
         write!(f, "{}", self.print_to_string())
     }
 }
+#[repr(C)]
+pub struct RustString {
+    pub bytes: RefCell<Vec<u8>>,
+}
+
+impl RustString {
+    pub fn len(&self) -> usize {
+        self.bytes.borrow().len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.bytes.borrow().is_empty()
+    }
+}
