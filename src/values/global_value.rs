@@ -38,8 +38,25 @@ use crate::values::traits::AsValueRef;
 use crate::values::MetadataValue;
 use crate::values::{BasicValue, BasicValueEnum, PointerValue, Value};
 use crate::{DLLStorageClass, GlobalVisibility, ThreadLocalMode};
-use types::*;
+//use  crate::types::RustString;
 use super::AnyValue;
+
+
+
+#[repr(C)]
+pub struct RustString {
+    pub bytes: RefCell<Vec<u8>>,
+}
+
+impl RustString {
+    pub fn len(&self) -> usize {
+        self.bytes.borrow().len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.bytes.borrow().is_empty()
+    }
+}
 
 // REVIEW: GlobalValues are always PointerValues. With SubTypes, we should
 // compress this into a PointerValue<Global> type
