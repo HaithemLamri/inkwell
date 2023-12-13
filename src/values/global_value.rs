@@ -38,7 +38,7 @@ use crate::values::traits::AsValueRef;
 use crate::values::MetadataValue;
 use crate::values::{BasicValue, BasicValueEnum, PointerValue, Value};
 use crate::{DLLStorageClass, GlobalVisibility, ThreadLocalMode};
-use crate::types::RustString;
+use crate::types::*;
 use super::AnyValue;
 
 // REVIEW: GlobalValues are always PointerValues. With SubTypes, we should
