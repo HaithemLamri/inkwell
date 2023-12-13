@@ -15,7 +15,8 @@ use crate::types::traits::AsTypeRef;
 use crate::types::{ArrayType, BasicTypeEnum, FunctionType, PointerType, Type};
 use crate::values::{ArrayValue, AsValueRef, BasicValueEnum, IntValue, StructValue};
 use crate::AddressSpace;
-
+use std::cell::RefCell;
+use std::string::FromUtf8Error;
 /// A `StructType` is the type of a heterogeneous container of types.
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub struct StructType<'ctx> {
