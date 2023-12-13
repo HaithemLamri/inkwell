@@ -27,7 +27,8 @@ use llvm_sys::LLVMUnnamedAddr;
 
 use std::ffi::CStr;
 use std::fmt::{self, Display};
-
+use std::cell::RefCell;
+use std::string::FromUtf8Error;
 
 #[llvm_versions(7.0..=latest)]
 use crate::comdat::Comdat;
@@ -37,7 +38,7 @@ use crate::values::traits::AsValueRef;
 use crate::values::MetadataValue;
 use crate::values::{BasicValue, BasicValueEnum, PointerValue, Value};
 use crate::{DLLStorageClass, GlobalVisibility, ThreadLocalMode};
-use crate::types::RustString;
+use crate::types::*;
 use super::AnyValue;
 
 // REVIEW: GlobalValues are always PointerValues. With SubTypes, we should
