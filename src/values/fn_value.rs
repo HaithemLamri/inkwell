@@ -523,7 +523,7 @@ impl<'ctx> FunctionValue<'ctx> {
 
     /// create an LLVMModule from a function
     pub fn llmod<'ctx>(&self) -> Module<'ctx> {
-        let c_string = to_c_str(self.get_name());
+        let c_string = to_c_str(self.get_name().to_str());
 
         unsafe { Module::new(LLVMModuleCreateWithName(c_string.as_ptr())) }
     }
