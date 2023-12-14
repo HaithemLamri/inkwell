@@ -8,7 +8,7 @@ use llvm_sys::core::{
     LLVMGetFirstParam, LLVMGetFunctionCallConv, LLVMGetGC, LLVMGetIntrinsicID, LLVMGetLastBasicBlock, LLVMGetLastParam,
     LLVMGetLinkage, LLVMGetNextFunction, LLVMGetNextParam, LLVMGetParam, LLVMGetParams, LLVMGetPreviousFunction,
     LLVMIsAFunction, LLVMIsConstant, LLVMSetFunctionCallConv, LLVMSetGC, LLVMSetLinkage, LLVMSetParamAlignment,
-    LLVMModuleCreateWithName,
+    LLVMModuleCreateWithName, LLVMTypeOf
 };
 use llvm_sys::core::{LLVMGetPersonalityFn, LLVMSetPersonalityFn};
 #[llvm_versions(7.0..=latest)]
@@ -212,6 +212,9 @@ impl<'ctx> FunctionValue<'ctx> {
     #[llvm_versions(8.0..=latest)]
     pub fn get_type(self) -> FunctionType<'ctx> {
         unsafe { FunctionType::new(llvm_sys::core::LLVMGlobalGetValueType(self.as_value_ref())) }
+    }
+    pub fn val_ty(self,&v :GlobalValue) -> BasicType<'ctx> {
+        unsafe {BasicType::as_basic_type_enum(LLVMTypeOf(v))}
     }
 
     // TODOC: How this works as an exception handler
