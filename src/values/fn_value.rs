@@ -523,7 +523,7 @@ impl<'ctx> FunctionValue<'ctx> {
     }
 
     /// create an LLVMModule from a function
-    pub fn llmod<'ctx>(&self) -> Module<'ctx> {
+    pub fn llmod(&self) -> Module<'ctx> {
         unsafe { Module::new(LLVMModuleCreateWithName(self.get_name().as_ptr())) }
     }
 }
