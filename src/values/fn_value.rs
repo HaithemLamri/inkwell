@@ -214,9 +214,9 @@ impl<'ctx> FunctionValue<'ctx> {
     pub fn get_type(self) -> FunctionType<'ctx> {
         unsafe { FunctionType::new(llvm_sys::core::LLVMGlobalGetValueType(self.as_value_ref())) }
     }
-    pub fn val_ty(self,v :LLVMValueRef) -> dyn BasicType<'ctx> {
-        unsafe {BasicType::as_basic_type_enum(LLVMTypeOf(v))}
-    }
+    // pub fn val_ty(self,v :LLVMValueRef) -> dyn BasicType<'ctx> {
+    //     unsafe {BasicType::as_basic_type_enum(LLVMTypeOf(v))}
+    // }
 
     // TODOC: How this works as an exception handler
     pub fn has_personality_function(self) -> bool {
